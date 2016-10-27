@@ -18,6 +18,7 @@ class SocketChatWidget extends Widget
 {
     public $room = '';
     public $hash = '';
+    public $message_area_id = '';
 
     /** @inheritdoc */
     public function run()
@@ -42,11 +43,17 @@ JS;
 JS;
         }
 
+        if ($this->message_area_id) {
+            $js .= <<<JS
+                socketChat.message_area_id = "$this->message_area_id";
+JS;
+        }
+
         $socket_url = Server::getServerHost() . ':' . Server::getPort();
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
 JS;
 
-        $this->view->registerJs($js);
+            $this->view->registerJs($js);
+        }
     }
-}
