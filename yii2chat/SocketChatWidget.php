@@ -45,7 +45,7 @@ JS;
 
         if ($this->message_area_id) {
             $js .= <<<JS
-                socketChat.message_area_id = "$this->message_area_id";
+                socketChat.setMessageAreaId("$this->message_area_id");
 JS;
         }
 
@@ -54,6 +54,6 @@ JS;
             socketChat.socket_url = "$socket_url";
 JS;
 
-            $this->view->registerJs($js);
-        }
+        $this->view->registerJs($js);
     }
+}
