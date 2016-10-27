@@ -45,6 +45,13 @@ JS;
 JS;
         }
 
+        $send_on_enter = $options['send_on_enter'] ?? false;
+        if ($send_on_enter) {
+            $js .= <<<JS
+                socketChat.send_on_enter = $send_on_enter;
+JS;
+        }
+
         $socket_url = Server::getServerHost() . ':' . Server::getPort();
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
