@@ -19,6 +19,7 @@ class SocketChatWidget extends Widget
     public $room = '';
     public $hash = '';
     public $message_area_id = '';
+    public $send_on_enter = false;
 
     public static function prepareJs($options)
     {
@@ -70,7 +71,8 @@ JS;
         $js = self::prepareJs([
             'room' => $this->room,
             'hash' => $this->hash,
-            'message_area_id' => $this->message_area_id
+            'message_area_id' => $this->message_area_id,
+            'send_on_enter' => $this->send_on_enter
         ]);
 
         $this->view->registerJs($js);
