@@ -20,32 +20,28 @@ class SocketChatWidget extends Widget
     public $hash = '';
     public $message_area_id = '';
 
-    /** @inheritdoc */
-    public function run()
+    public static function prepareJs($options)
     {
-        parent::run();
-        SocketChatAsset::register($this->view);
+        $js = Server::fillJavaConstants();
 
-        $this->view->registerJs(
-            Server::fillJavaConstants()
-        );
-
-        $js = '';
-        if ($this->room) {
+        $room = $options['room'] ?? '';
+        if ($room) {
             $js .= <<<JS
-                socketChat.room = "$this->room";
+                socketChat.room = "$room";
 JS;
         }
 
-        if ($this->hash) {
+        $hash = $options['hash'] ?? '';
+        if ($hash) {
             $js .= <<<JS
-                socketChat.hash = "$this->hash";
+                socketChat.hash = "$hash";
 JS;
         }
 
-        if ($this->message_area_id) {
+        $message_area_id = $options['message_area_id'] ?? '';
+        if ($message_area_id) {
             $js .= <<<JS
-                socketChat.setMessageAreaId("$this->message_area_id");
+                socketChat.setMessageAreaId("$message_area_id");
 JS;
         }
 
@@ -53,6 +49,22 @@ JS;
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
 JS;
+
+        return $js;
+    }
+
+    /** @inheritdoc */
+    public function run()
+    {
+        parent::run();
+
+        SocketChatAsset::register($this->view);
+
+        $js = self::prepareJs([
+            'room' => $this->room,
+            'hash' => $this->hash,
+            'message_area_id' => $this->message_area_id
+        ]);
 
         $this->view->registerJs($js);
     }
