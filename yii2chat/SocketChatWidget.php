@@ -20,42 +20,25 @@ class SocketChatWidget extends Widget
     public $hash = '';
     public $message_area_id = '';
     public $send_on_enter = false;
+    public $current_user_id = 0;
 
     public static function prepareJs($options)
     {
         $js = Server::fillJavaConstants();
 
-        $room = $options['room'] ?? '';
-        if ($room) {
-            $js .= <<<JS
-                socketChat.room = "$room";
-JS;
-        }
-
-        $hash = $options['hash'] ?? '';
-        if ($hash) {
-            $js .= <<<JS
-                socketChat.hash = "$hash";
-JS;
-        }
-
-        $message_area_id = $options['message_area_id'] ?? '';
-        if ($message_area_id) {
-            $js .= <<<JS
-                socketChat.setMessageAreaId("$message_area_id");
-JS;
-        }
-
-        $send_on_enter = $options['send_on_enter'] ?? false;
-        if ($send_on_enter) {
-            $js .= <<<JS
-                socketChat.send_on_enter = $send_on_enter;
-JS;
-        }
-
         $socket_url = Server::getServerHost() . ':' . Server::getPort();
+        $current_user_id = $options['current_user_id'] ?? 0;
+        $room = $options['room'] ?? '';
+        $hash = $options['hash'] ?? '';
+        $send_on_enter = $options['send_on_enter'] ?? false;
+        $message_area_id = $options['message_area_id'] ?? '';
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
+            socketChat.current_user_id = "$current_user_id";
+            socketChat.room = "$room";
+            socketChat.hash = "$hash";
+            socketChat.send_on_enter = $send_on_enter;
+            socketChat.setMessageAreaId("$message_area_id");
 JS;
 
         return $js;
@@ -72,7 +55,8 @@ JS;
             'room' => $this->room,
             'hash' => $this->hash,
             'message_area_id' => $this->message_area_id,
-            'send_on_enter' => $this->send_on_enter
+            'send_on_enter' => $this->send_on_enter,
+            'current_user_id' => $this->current_user_id
         ]);
 
         $this->view->registerJs($js);
