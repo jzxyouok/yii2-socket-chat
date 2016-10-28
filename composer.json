@@ -1,6 +1,8 @@
 {
   "name": "programmis/yii2-socket-chat",
   "description": "Yii2 socket chat base on simple socket chat",
+  "homepage": "https://github.com/programmis/yii2-socket-chat",
+  "license": "MIT",
   "type": "extra",
   "authors": [
     {
