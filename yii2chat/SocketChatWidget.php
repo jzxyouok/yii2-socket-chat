@@ -21,6 +21,7 @@ class SocketChatWidget extends Widget
     public $message_area_id = '';
     public $send_on_enter = false;
     public $current_user_id = 0;
+    public $recipient_id = 0;
 
     public static function prepareJs($options)
     {
@@ -58,7 +59,8 @@ JS;
             'hash' => $this->hash,
             'message_area_id' => $this->message_area_id,
             'send_on_enter' => $this->send_on_enter,
-            'current_user_id' => $this->current_user_id
+            'current_user_id' => $this->current_user_id,
+            'recipient_id' => $this->recipient_id
         ]);
 
         $this->view->registerJs($js);
