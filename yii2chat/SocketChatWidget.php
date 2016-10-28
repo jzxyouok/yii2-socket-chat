@@ -32,6 +32,7 @@ class SocketChatWidget extends Widget
         $hash = $options['hash'] ?? '';
         $send_on_enter = $options['send_on_enter'] ?? false;
         $message_area_id = $options['message_area_id'] ?? '';
+        $recipient_id = $options['recipient_id'] ?? 0;
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
             socketChat.current_user_id = "$current_user_id";
@@ -39,6 +40,7 @@ class SocketChatWidget extends Widget
             socketChat.hash = "$hash";
             socketChat.send_on_enter = $send_on_enter;
             socketChat.setMessageAreaId("$message_area_id");
+            socketChat.recipient_id = $recipient_id;
 JS;
 
         return $js;
