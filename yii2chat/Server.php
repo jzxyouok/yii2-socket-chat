@@ -10,6 +10,7 @@ namespace yii2chat;
 
 /**
  * Class Server
+ *
  * @package common\components\chat
  */
 class Server extends \chat\Server
@@ -26,6 +27,7 @@ class Server extends \chat\Server
         if (isset(self::$chatCfg['configClass']) && self::$chatCfg['configClass']) {
             return self::$chatCfg['configClass'];
         }
+
         return parent::getConfigClass();
     }
 
@@ -63,6 +65,19 @@ class Server extends \chat\Server
     /**
      * @return string
      */
+    public static function getConnectionType()
+    {
+        self::initChatConfig();
+        if (isset(self::$chatCfg['connection_type']) && self::$chatCfg['connection_type']) {
+            return self::$chatCfg['connection_type'];
+        }
+
+        return self::$connection_type;
+    }
+
+    /**
+     * @return string
+     */
     public static function getServerHost()
     {
         self::initChatConfig();
@@ -80,9 +95,10 @@ class Server extends \chat\Server
     {
         self::initChatConfig();
 
-        self::$listen_host = self::getListenHost();
-        self::$server_host = self::getServerHost();
-        self::$port = self::getPort();
+        self::$listen_host     = self::getListenHost();
+        self::$server_host     = self::getServerHost();
+        self::$port            = self::getPort();
+        self::$connection_type = self::getConnectionType();
 
         return parent::__construct();
     }

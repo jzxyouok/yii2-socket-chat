@@ -22,7 +22,7 @@
   "require": {
     "php": ">=7",
     "yiisoft/yii2-bootstrap": "*",
-    "programmis/socket-chat": ">=0.0.4"
+    "programmis/socket-chat": "0.*"
   },
   "scripts": {
     "post-install-cmd": "php init --env=Development --overwrite=n",
