@@ -23,7 +23,6 @@ class SocketChatWidget extends Widget
     public $send_on_enter = false;
     public $current_user_id = 0;
     public $recipient_id = 0;
-    public $connection_type = 'ws';
 
     /**
      * @param array $options
@@ -41,7 +40,7 @@ class SocketChatWidget extends Widget
         $send_on_enter   = $options['send_on_enter'] ?? false;
         $message_area_id = $options['message_area_id'] ?? '';
         $recipient_id    = $options['recipient_id'] ?? 0;
-        $connection_type = $options['connection_type'] ?? 'ws';
+        $connection_type = Server::getConnectionType();
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
             socketChat.current_user_id = "$current_user_id";
@@ -69,8 +68,7 @@ JS;
             'message_area_id' => $this->message_area_id,
             'send_on_enter'   => $this->send_on_enter,
             'current_user_id' => $this->current_user_id,
-            'recipient_id'    => $this->recipient_id,
-            'connection_type' => $this->connection_type
+            'recipient_id'    => $this->recipient_id
         ]);
 
         $this->view->registerJs($js);
