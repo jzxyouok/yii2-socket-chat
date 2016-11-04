@@ -17,7 +17,7 @@ php composer.phar require programmis/yii2-socket-chat
 
 **In config/main.php**
 
-<pre>
+```php
 'components' => [
     'chat'        => [
         'class'       => '\path\to\Server',
@@ -27,11 +27,11 @@ php composer.phar require programmis/yii2-socket-chat
         'port'        => 1337,
     ],
 ]
-</pre>
+```
 
 **In php code**
 
-<pre>
+```php
 SocketChatWidget::widget([
     'room' => 'my_room',
     'hash' => 'you_hash, /* in UserProcessor->createUser */
@@ -40,6 +40,6 @@ SocketChatWidget::widget([
     'current_user_id' => $user->id,
     /* 'recipient_id' => $recipient_id */
 ]);
-</pre>
+```
 
 How it work see https://github.com/programmis/socket_chat
