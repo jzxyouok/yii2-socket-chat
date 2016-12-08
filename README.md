@@ -25,6 +25,11 @@ php composer.phar require programmis/yii2-socket-chat
         'listen_host' => '0.0.0.0',
         'server_host' => '127.0.0.1',
         'port'        => 1337,
+        'connection_type' = 'wss',
+        'wss' => [
+            'local_cert => '/path/to/cert',
+            'local_pk' => '/path/to/cert.pk'
+        ]
     ],
 ]
 ```
