@@ -89,6 +89,36 @@ class Server extends \chat\Server
     }
 
     /**
+     * @return string
+     */
+    public static function getWssLocalCert()
+    {
+        self::initChatConfig();
+        if (isset(self::$chatCfg['wss'], self::$chatCfg['wss']['local_cert'])
+            && self::$chatCfg['wss']['local_cert']
+        ) {
+            return self::$chatCfg['wss']['local_cert'];
+        }
+
+        return self::$wss_local_cert;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getWssLocalPk()
+    {
+        self::initChatConfig();
+        if (isset(self::$chatCfg['wss'], self::$chatCfg['wss']['local_pk'])
+            && self::$chatCfg['wss']['local_pk']
+        ) {
+            return self::$chatCfg['wss']['local_pk'];
+        }
+
+        return self::$wss_local_pk;
+    }
+
+    /**
      * Server constructor.
      */
     public function __construct()
@@ -99,6 +129,8 @@ class Server extends \chat\Server
         self::$server_host     = self::getServerHost();
         self::$port            = self::getPort();
         self::$connection_type = self::getConnectionType();
+        self::$wss_local_cert  = self::getWssLocalCert();
+        self::$wss_local_pk    = self::getWssLocalPk();
 
         return parent::__construct();
     }
