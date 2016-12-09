@@ -27,7 +27,7 @@ php composer.phar require programmis/yii2-socket-chat
         'port'        => 1337,
         'connection_type' = 'wss',
         'wss' => [
-            'local_cert => '/path/to/cert',
+            'local_cert' => '/path/to/cert',
             'local_pk' => '/path/to/cert.pk'
         ]
     ],
