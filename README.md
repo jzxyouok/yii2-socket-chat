@@ -20,15 +20,15 @@ php composer.phar require programmis/yii2-socket-chat
 ```php
 'components' => [
     'chat'        => [
-        'class'       => '\path\to\Server',
-        'configClass' => '\path\to\Config',
-        'listen_host' => '0.0.0.0',
-        'server_host' => '127.0.0.1',
-        'port'        => 1337,
-        'connection_type' = 'wss',
+        'class'           => '\path\to\Server',
+        'configClass'     => '\path\to\Config',
+        'listen_host'     => '0.0.0.0',
+        'server_host'     => '127.0.0.1',
+        'port'            => 1337,
+        'connection_type' => 'wss',
         'wss' => [
-            'local_cert' => '/path/to/cert',
-            'local_pk' => '/path/to/cert.pk'
+            'local_cert' => '/path/to/cert',    //cert.pem
+            'local_pk'   => '/path/to/cert.pk'  //primary key
         ]
     ],
 ]
@@ -38,11 +38,11 @@ php composer.phar require programmis/yii2-socket-chat
 
 ```php
 SocketChatWidget::widget([
-    'room' => 'my_room',
-    'hash' => 'you_hash, /* in UserProcessor->createUser */
-    'message_area_id' => 'chat_text_area',
-    'send_on_enter' => true,
-    'current_user_id' => $user->id,
+    'room'              => 'my_room',
+    'hash'              => 'you_hash, /* in UserProcessor->createUser */
+    'message_area_id'   => 'chat_text_area',
+    'send_on_enter'     => true,
+    'current_user_id'   => $user->id,
     /* 'recipient_id' => $recipient_id */
 ]);
 ```
