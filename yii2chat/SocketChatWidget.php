@@ -31,16 +31,18 @@ class SocketChatWidget extends Widget
      */
     public static function prepareJs($options)
     {
-        $js = Server::fillJavaConstants();
+        $js   = Server::fillJavaConstants();
+        $port = Server::getProxyPort() ? Server::getProxyPort() : Server::getPort();
 
-        $socket_url      = Server::getServerHost() . ':' . Server::getPort();
+        $socket_url      = Server::getServerHost() . ':' . $port;
         $current_user_id = $options['current_user_id'] ?? 0;
         $room            = $options['room'] ?? '';
         $hash            = $options['hash'] ?? '';
         $send_on_enter   = $options['send_on_enter'] ?? false;
         $message_area_id = $options['message_area_id'] ?? '';
         $recipient_id    = $options['recipient_id'] ?? 0;
-        $connection_type = Server::getConnectionType();
+        $connection_type = Server::getProxyConnectionType() ?
+            Server::getProxyConnectionType() : Server::getConnectionType();
         $js .= <<<JS
             socketChat.socket_url = "$socket_url";
             socketChat.current_user_id = "$current_user_id";
