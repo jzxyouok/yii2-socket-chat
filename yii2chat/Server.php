@@ -63,6 +63,19 @@ class Server extends \chat\Server
     }
 
     /**
+     * @return int
+     */
+    public static function getProxyPorty()
+    {
+        self::initChatConfig();
+        if (isset(self::$chatCfg['proxy_port']) && self::$chatCfg['proxy_port']) {
+            return self::$chatCfg['proxy_port'];
+        }
+
+        return self::$proxy_port;
+    }
+
+    /**
      * @return string
      */
     public static function getConnectionType()
@@ -128,6 +141,7 @@ class Server extends \chat\Server
         self::$listen_host     = self::getListenHost();
         self::$server_host     = self::getServerHost();
         self::$port            = self::getPort();
+        self::$proxy_port      = self::getProxyPorty();
         self::$connection_type = self::getConnectionType();
         self::$wss_local_cert  = self::getWssLocalCert();
         self::$wss_local_pk    = self::getWssLocalPk();
