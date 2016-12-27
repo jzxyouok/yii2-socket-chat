@@ -19,14 +19,15 @@ php composer.phar require programmis/yii2-socket-chat
 
 ```php
 'components' => [
-    'chat'        => [
-        'class'           => '\path\to\Server',
-        'configClass'     => '\path\to\Config',
-        'listen_host'     => '0.0.0.0',
-        'server_host'     => '127.0.0.1',
-        'port'            => 1337,
-        'proxy_port'      => 1338,
-        'connection_type' => 'wss',
+    'chat'   => [
+        'class'                 => '\path\to\Server',
+        'configClass'           => '\path\to\Config',
+        'listen_host'           => '0.0.0.0',
+        'server_host'           => '127.0.0.1',
+        'port'                  => 1337,
+        'proxy_port'            => 1338,
+        'connection_type'       => 'wss',
+        'proxy_connection_type' => 'ws',
         'wss' => [
             'local_cert' => '/path/to/cert',    //cert.pem
             'local_pk'   => '/path/to/cert.pk'  //primary key
